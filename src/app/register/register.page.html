@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  
+    <ion-item>
+      <ion-label position="floating">Correo electrónico</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <div *ngIf="formControls['email'].invalid && formControls['email'].touched" class="error-message">
+      <p *ngIf="formControls['email'].hasError('required')">El correo electrónico es obligatorio.</p>
+      <p *ngIf="formControls['email'].hasError('email')">Por favor ingresa un correo válido.</p>
+    </div>
+
+  
+    <ion-item>
+      <ion-label position="floating">Nombre completo</ion-label>
+      <ion-input formControlName="fullName"></ion-input>
+    </ion-item>
+    <div *ngIf="formControls['fullName'].invalid && formControls['fullName'].touched" class="error-message">
+      <p *ngIf="formControls['fullName'].hasError('required')">El nombre completo es obligatorio.</p>
+    </div>
+
+  
+    <ion-item>
+      <ion-label position="floating">Nombre de usuario</ion-label>
+      <ion-input formControlName="user"></ion-input>
+    </ion-item>
+    <div *ngIf="formControls['user'].invalid && formControls['user'].touched" class="error-message">
+      <p *ngIf="formControls['user'].hasError('required')">El nombre de usuario es obligatorio.</p>
+      <p *ngIf="formControls['user'].hasError('noSpaces')">El nombre de usuario no puede contener espacios.</p>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+    <div *ngIf="formControls['password'].invalid && formControls['password'].touched" class="error-message">
+      <p *ngIf="formControls['password'].hasError('required')">La contraseña es obligatoria.</p>
+      <p *ngIf="formControls['password'].hasError('minlength')">La contraseña debe tener al menos 6 caracteres.</p>
+    </div>
+
+
+    <ion-item>
+      <ion-label position="floating">Confirmar contraseña</ion-label>
+      <ion-input formControlName="confirmPassword" type="password"></ion-input>
+    </ion-item>
+    <div *ngIf="formControls['confirmPassword'].invalid && formControls['confirmPassword'].touched" class="error-message">
+      <p *ngIf="formControls['confirmPassword'].hasError('required')">Confirmar contraseña es obligatorio.</p>
+      <p *ngIf="formControls['confirmPassword'].hasError('minlength')">La contraseña debe tener al menos 6 caracteres.</p>
+      <p *ngIf="formControls['confirmPassword'].hasError('mismatch')">Las contraseñas no coinciden.</p>
+    </div>
+
+    
+    <ion-button expand="full" type="submit" [disabled]="registerForm.invalid">Registrar</ion-button>
+  </form>
+</ion-content>
